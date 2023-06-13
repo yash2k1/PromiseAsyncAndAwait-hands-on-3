@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./style.css">
+  <title>Promise async and await-hands on 3</title>
+</head>
+
+<body>
+  <div class="container1">
+
+    <div class="questions">
+      <!-- Question 1 -->
+      <div class="heading">Promise async and await-hands on 3</div>
+      <div class="container">
+        <div class="question"> Q1.
+          Write one example explaining how you can write a callback function.
+        </div>
+        <div id="ans1" class="ans">
+          <pre>
+ // function
+ function greet(name, callback) {
+     console.log('Hi' + ' ' + name);
+     callback();
+ }
+ // callback function
+ function callMe() {
+     console.log('I am callback function');
+ }
+ // passing function as an argument
+ greet('Peter', callMe);  
+
+</pre>
+          callMe() is a callback() function and greet is a HOF (hight order function) callme is pass as a parameter in
+          the greet
+          after greet runs the console then it call the callback function .
+
+        </div>
+      </div>
+      <!-- Question 2 -->
+
+      <div class="container ">
+        <div class="question">Q2.
+
+          "Write a callback function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should be
+          printed after 2 sec, 3 should be printed after 3 sec, and so on.
+          <pre>
+          Explain callback hell.
+          Numbers
+          1
+          2
+          3
+          4
+          5
+          6
+          7"
+          </pre>
+        </div>
+        <div id="ans2" class="ans">
+          <pre>
+function ques2(){
+  setTimeout(() => {
+     console.log("1");
+     setTimeout(()=>{
+         console.log("2");
+         setTimeout(()=>{
+             console.log("3");
+             setTimeout(()=>{
+                 console.log("4");
+                 setTimeout(()=>{
+                     console.log("5");
+                     setTimeout(()=>{
+                       console.log("6");
+                         setTimeout(()=>{
+                             console.log("7");
+                         },1000);
+                     },1000);
+                 },1000);
+             },1000);
+         },1000);
+     },1000);
+  }, 1000);
+ }
+        </pre>
+          <div id="run2">
+            <button onclick="ques2()">Run</button>
+            <div id="result2"></div>
+            <p>
+              Here, every setTimeout() is callback (except the first stetimeout)
+              inner setTimeout call after the execution of previous setTimeout
+              due to this we can aachive 1 should be printed after 1 sec, 2 should be
+              printed after 2 sec, 3 should be printed after 3 sec, and so on.
+              .</p>
+          </div>
+        </div>
+      </div>
+      <!-- Question 3 -->
+
+      <div class="container">
+        <div class="question"> Q3.
+          "Write the promise function to print numbers from 1 to 7, in which 1 should be printed after 1 sec, 2 should
+          be printed after 2 sec, 3 should be printed after 3 sec, and so on.
+
+          <pre>
+          Numbers
+          1
+          2
+          3
+          4
+          5
+          6
+          7"
+        </pre>
+        </div>
+        <div id="ans3" class="ans">
+ <pre>
+function myPromise(number, timeout) {
+  return new Promise((res) => {
+    setTimeout(() => {
+      console.log(number);
+      res("promise is resolved");
+    }, timeout);
+  });
+}
+myPromise(1, 1000)
+  .then(() => {
+    myPromise(2, 2000*3/2);
+  })
+  .then(() => {
+    myPromise(3, 3000*4/2);
+  })
+  .then(() => {
+    myPromise(4, 4000*5/2);
+  })
+  .then(() => {
+    myPromise(5, 5000*6/2);
+  })
+  .then(() => {
+    myPromise(6, 6000*7/2);
+  })
+  .then(() => {
+    myPromise(7, 7000*8/2);
+  });
+ </pre>
+ <div id="run3">
+  <button onclick="ques3()" >Run</button>
+  <div id="result3"></div>
+        </div>
+       
+      </div>
+      </div>
+      <!-- Question 4 -->
+
+      <div class="container ">
+        <div class="question">Q4.
+          "Create a promise function accepting an argument, if yes is passed to the function then it should go to
+          resolved state and print Promise Resolved, and if nothing is passed
+          then it should go to reject the state and catch the error and print Promise Rejected "
+        </div>
+        <div class="ans">
+          <pre>
+<label for="inputAns4">Value of argument:</label> <input type="text" placeholder="enter the value of argument" id="inputAns4" > <br>
+<button onclick="func4()">click</button> <br>
+<div id="ans4"></div>
+function promiseFun(p){
+return new Promise ((res,rej)=>{
+if(p==="yes"){
+res("Promise resolved...");
+}else{
+rej("Promise rejected...");
+}
+})
+}
+// handel the promise
+promiseFun(p)
+.then((item)=>{console.log(item)})
+.catch((err)=>{console.log(err)});
+
+       </pre>
+        </div>
+      </div>
+      <!-- Question 5 -->
+
+      <div class="container ">
+        <div class="question">
+          Q5.
+          Create examples to explain callback function
+        </div>
+        <div class="ans">
+          <pre>
+ function sum(a, b) {
+   console.log(a + b)
+ }
+ 
+ function operation(val1, val2, callback) {
+   callback(val1, val2)
+ }
+ 
+ operation(6, 5, sum)
+        </pre>
+        11 <br>
+          we can see in the function operation the third parameter is a callback function. We are first passing the
+          "callback" as an argument and then calling it inside the parent function
+          i.e., operation. Here, we have taken the "sum" as the callback function, we can create any function and pass
+          it as the callback in the operation function.
+        </div>
+
+      </div>
+      <!-- Question 6 -->
+      <div class="container ">
+        <div class="question">
+          Q6.
+          Create examples to explain callback hell function
+
+        </div>
+        <div class="ans">
+          To cook maggie, there are multiple steps taken one after another, namely:
+          Implementing each of these steps in code:
+          Get maggie
+          add vegies
+          boil water
+          Cook maggie
+          Serve maggie
+
+          <pre>
+setTimeout(() => {
+  console.log("get maggie from shop");
+  setTimeout(() => {
+    console.log("cut and add some vegies");
+    setTimeout(() => {
+      console.log("boil water");
+      setTimeout(() => {
+        console.log("cook maggie");
+        setTimeout(() => {
+          console.log("serve maggie");
+        }, 1000);
+      }, 1000);
+    }, 1000);
+  }, 1000);
+}, 1000);
+          </pre>
+          <div id="result6"></div>
+          <button id="ans6Btn" onclick="func6()">Run</button> <br>
+          The phenomenon which happens when we nest multiple callbacks within a function is called a callback hell. The
+          shape of the resulting code structure resembles a pyramid and hence callback hell is also called the “pyramid
+          of the doom”. It makes the code very difficult to understand and maintain.
+
+        </div>
+      </div>
+      <!-- Question 7 -->
+      <div class="container ">
+        <div class="question">Q7.
+          Create examples to explain promises function
+        </div>
+        <div class="ans">
+<pre>
+  function promise(p){
+    return new Promise((res,rej)=>{
+  if(p<5){
+    res("promise is resolved...");
+  }else{
+    rej("promise is rejected...");
+  }
+  })}
+  promise (input7.value)
+  .then((result)=>{
+    ans7.innerHTML= result;
+    ans7.style.color="lightGreen";
+  })
+  .catch((err)=>{
+    console.log(err);
+    ans7.innerHTML= err;
+    ans7.style.color="red";
+  
+  })
+</pre>
+
+        <label for="input7"></label><input type="text" placeholder="Enter the value to parameter" id="input7"> <br>
+        <button id="ans7Btn" onclick="func7()">Run</button> <br>
+        <div id="ans7"></div>
+        </div>
+      </div>
+      <!-- Question 8 -->
+      <div class="container ">
+        <div class="question">Q8.
+          Create examples to explain async await function
+        </div>
+        <div class="ans">
+   <pre>
+ let promise = new Promise(function (resolve, reject) {
+   setTimeout(function () {
+   resolve('Promise resolved')}, 4000); 
+ });
+ 
+ // async function
+ async function asyncFunc() {
+   try {
+       // wait until the promise resolves 
+       let result = await promise; 
+ 
+       console.log(result);
+   }   
+   catch(error) {
+       console.log(error);
+   }
+ }
+ 
+ // calling the async function
+ asyncFunc(); // Promise resolved
+    
+   </pre>
+   Promise resolved after 4 second
+   The await keyword is used inside the async function to wait for the asynchronous operation. and here we are waiting for the promise to be resolve or reject
+   we have used try/catch block to handle the errors. If the program runs successfully, it will go to the try block. And if the program throws an error, it will go to the catch block.
+
+
+        </div>
+      </div>
+      <!-- Question 9 -->
+      <div class="container">
+        <div class="question">Q9.
+          Create examples to explain promise.all function
+        </div>
+        <div class="ans">
+<pre>
+  const promise1 =new Promise((resolve,reject)=>{
+    setTimeout(() => {
+      resolve('promise 1');
+    },1000);
+  })
+  const promise2 =new Promise((resolve,reject)=>{
+    setTimeout(() => {
+      resolve('promise 2');
+    },4000);
+  })
+  const promise3 =new Promise((resolve,reject)=>{
+    setTimeout(() => {
+      resolve('promise 3');
+    },2000);
+  })
+  Promise.all([promise1,promise2,promise3])
+  .then ((result)=>{
+    console.log("all promise are fullfiled",result);
+  })
+</pre>
+    ['promise 1', 'promise 2', 'promise 3'] <br>
+    The Promise.all() static method takes an iterable of promises as input and returns a single Promise. This returned promise fulfills when all of the input's promises fulfill (including when an empty iterable is passed), with an array of the fulfillment values. It rejects when any of the input's promises rejects, with this first rejection reason.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+
+</html>
