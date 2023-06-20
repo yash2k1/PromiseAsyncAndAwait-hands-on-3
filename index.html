@@ -117,33 +117,21 @@ function ques2(){
         </div>
         <div id="ans3" class="ans">
  <pre>
-function myPromise(number, timeout) {
-  return new Promise((res) => {
-    setTimeout(() => {
-      console.log(number);
-      res("promise is resolved");
-    }, timeout);
-  });
-}
-myPromise(1, 1000)
-  .then(() => {
-    myPromise(2, 2000*3/2);
-  })
-  .then(() => {
-    myPromise(3, 3000*4/2);
-  })
-  .then(() => {
-    myPromise(4, 4000*5/2);
-  })
-  .then(() => {
-    myPromise(5, 5000*6/2);
-  })
-  .then(() => {
-    myPromise(6, 6000*7/2);
-  })
-  .then(() => {
-    myPromise(7, 7000*8/2);
-  });
+  function myPromise(number, timeout) {
+    return new Promise((res) => {
+      setTimeout(() => {
+        console.log(number);
+        res("promise is resolved");
+      }, timeout);
+    });
+  }
+  myPromise(1,1000)
+  .then(()=>myPromise(2,2000))
+  .then(()=>myPromise(3,3000))
+  .then(()=>myPromise(4,4000))
+  .then(()=>myPromise(5,5000))
+  .then(()=>myPromise(6,6000))
+  .then(()=>myPromise(7,7000))
  </pre>
  <div id="run3">
   <button onclick="ques3()" >Run</button>
